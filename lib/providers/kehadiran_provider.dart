@@ -21,18 +21,19 @@ class KehadiranRecord {
 }
 
 class KehadiranProvider with ChangeNotifier {
-  List<Siswa> students = [
+  List<Siswa> Siswas = [
     Siswa(name: 'Ali'),
     Siswa(name: 'Budi'),
     Siswa(name: 'Citra'),
+    Siswa(name: 'Samuel'),
   ];
 
   List<KehadiranRecord> history = [];
 
   void saveKehadiran() {
     final date = DateFormat('dd MMM yyyy').format(DateTime.now());
-    final presentCount = students.where((s) => s.isPresent).length;
-    final absentCount = students.length - presentCount;
+    final presentCount = Siswas.where((s) => s.isPresent).length;
+    final absentCount = Siswas.length - presentCount;
 
     history.insert(
       0,
@@ -43,7 +44,7 @@ class KehadiranProvider with ChangeNotifier {
       ),
     );
 
-    for (var student in students) {
+    for (var student in Siswas) {
       student.isPresent = false;
     }
 

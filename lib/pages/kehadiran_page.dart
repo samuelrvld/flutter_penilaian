@@ -8,21 +8,21 @@ class KehadiranPage extends StatelessWidget {
     final provider = Provider.of<KehadiranProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text('Presensi Siswa'),
-      backgroundColor: Colors.yellowAccent),
+      appBar: AppBar(
+          title: Text('Presensi Siswa'), backgroundColor: Colors.yellowAccent),
       body: Column(
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: provider.students.length,
+              itemCount: provider.Siswas.length,
               itemBuilder: (context, index) {
-                final student = provider.students[index];
+                final Siswa = provider.Siswas[index];
                 return ListTile(
-                  title: Text(student.name),
+                  title: Text(Siswa.name),
                   trailing: Checkbox(
-                    value: student.isPresent,
+                    value: Siswa.isPresent,
                     onChanged: (value) {
-                      student.isPresent = value ?? false;
+                      Siswa.isPresent = value ?? false;
                       provider.notifyListeners();
                     },
                   ),
@@ -31,13 +31,18 @@ class KehadiranPage extends StatelessWidget {
             ),
           ),
           ElevatedButton(
-            onPressed: provider.students.isNotEmpty
+            onPressed: provider.Siswas.isNotEmpty
                 ? () => provider.saveKehadiran()
                 : null,
-            child: Text('Simpan Kehadiran'),
-          ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  vertical: 16.0,
+                  horizontal: 32.0), // Ubah padding sesuai keinginan
+              child: Text('Simpan Kehadiran'),
+            ),
+          )
         ],
       ),
     );
-  }  
+  }
 }
